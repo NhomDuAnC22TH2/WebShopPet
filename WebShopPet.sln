@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.34031.81
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebShopPet", "WebShopPet\WebShopPet.csproj", "{744CE52B-4167-446A-9684-E848AAA1943C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{744CE52B-4167-446A-9684-E848AAA1943C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{744CE52B-4167-446A-9684-E848AAA1943C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{744CE52B-4167-446A-9684-E848AAA1943C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{744CE52B-4167-446A-9684-E848AAA1943C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6D0EDD97-A99F-4354-AE0B-5E1D3D3F7F39}
+	EndGlobalSection
+EndGlobal
