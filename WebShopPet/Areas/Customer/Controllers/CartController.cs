@@ -8,6 +8,7 @@ using WebShopPet.Helper;
 
 namespace WebShopPet.Areas.Customer.Controllers
 {
+    [Area("Customer")]
     public class CartController : Controller
     {
         private readonly ApplicationDbContext _db;

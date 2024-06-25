@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using WebShopPet.Models;
 namespace WebShopPet.Areas.Admin.Controllers
 {
+    [Area("Admin")]
     public class ProductController : Controller
     {
         private readonly ApplicationDbContext _db;
