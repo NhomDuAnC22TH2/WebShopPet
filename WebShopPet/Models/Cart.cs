@@ -5,13 +5,13 @@ using System.Threading.Tasks;
 
 namespace WebShopPet.Models
 {
-    public class Cart
+    public class CartItem
     {
-        public class CartItem
-        {
-            public Product Product { get; set; }
-            public int Quantity { get; set; }
-        }
+        public Product Product { get; set; }
+        public int Quantity { get; set; }
+    }
+    
+       
         public class Cart
         {
             private List<CartItem> _items;
@@ -67,4 +67,5 @@ namespace WebShopPet.Models
                 }
             }
         }
-}
+    }
+

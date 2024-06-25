@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WebShopPet.Models;
+using WebShopPet.Helper;
+
 namespace WebShopPet.Areas.Customer.Controllers
 {
     public class CartController : Controller
@@ -16,7 +18,80 @@ namespace WebShopPet.Areas.Customer.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            Cart cart = HttpContext.Session.GetJson<Cart>("CART");
+            if (cart == null) {
+                cart = new Cart();
+            }
+            return View(cart);
         }
+        public IActionResult AddToCart(int productId)
+        {
+            var product = _db.Products.FirstOrDefault(x => x.Id == productId);
+            if (product != null) {
+                Cart cart = HttpContext.Session.GetJson<Cart>("CART");
+                if (cart == null) {
+                    cart = new Cart();
+                }
+                cart.Add(product, 1);
+                HttpContext.Session.SetJson("CART", cart);
+                // return Json(new { msg="success", qty = cart.Quantity});
+                return RedirectToAction("Index");
+            }
+            return Json(new { msg = "error" });
+        }
+        public IActionResult Remove(int productId)
+        {
+            var product = _db.Products.FirstOrDefault(x => x.Id == productId);
+            if (product != null) {
+                Cart cart = HttpContext.Session.GetJson<Cart>("CART");
+                if (cart != null) {
+
+                    cart.Remove(productId);
+                    HttpContext.Session.SetJson("CART", cart);
+                    // return Json(new { msg = "success", qty = cart.Quantity });
+                    return RedirectToAction("Index");
+                }
+            }
+            return Json(new { msg = "error" });
+        }
+        public IActionResult Update(int productId, int qty)
+        {
+            var product = _db.Products.FirstOrDefault(x => x.Id == productId);
+            if (product != null) {
+                Cart cart = HttpContext.Session.GetJson<Cart>("CART");
+                if (cart != null) {
+
+                    cart.Update(productId, qty);
+                    HttpContext.Session.SetJson("CART", cart);
+                    // return Json(new { msg = "success", qty = cart.Quantity });
+                    return RedirectToAction("Index");
+                }
+            }
+            return Json(new { msg = "error" });
+        }
+        public IActionResult AddToCartAPI(int productId)
+        {
+            var product = _db.Products.FirstOrDefault(x => x.Id == productId);
+            if (product != null) {
+                Cart cart = HttpContext.Session.GetJson<Cart>("CART");
+                if (cart == null) {
+                    cart = new Cart();
+                }
+                cart.Add(product, 1);
+                HttpContext.Session.SetJson("CART", cart);
+                return Json(new { msg = "Product added to cart", qty = cart.Quantity });
+            }
+            return Json(new { msg = "error" });
+        }
+
+        public IActionResult GetQuantityOfCart()
+        {
+            Cart cart = HttpContext.Session.GetJson<Cart>("CART");
+            if (cart != null) {
+                return Json(new { qty = cart.Quantity });
+            }
+            return Json(new { qty = 0 });
+        }
+
     }
 }
