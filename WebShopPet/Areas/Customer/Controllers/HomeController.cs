@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -12,15 +13,24 @@ namespace WebShopPet.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        private readonly ApplicationDbContext _db;
+        public HomeController(ILogger<HomeController> logger,ApplicationDbContext db)
         {
             _logger = logger;
+            _db = db;
         }
 
-        public IActionResult Index()
+        public IActionResult Index( int page)
         {
-            return View();
+            var pageIndex = (int)(page != null ? page : 1);
+            var pageSize = 6;
+
+            var productList = _db.Products.Include(x => x.Category).ToList();
+            var pageSum = productList.Count() / pageSize + (productList.Count() % pageSize > 0 ? 1 : 0);
+
+            ViewBag.PageSum = pageSum;
+            ViewBag.PageIndex = pageIndex;
+            return View(productList.Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList());
         }
 
         public IActionResult Privacy()
